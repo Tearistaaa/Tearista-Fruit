@@ -1,5 +1,106 @@
 .contact-section {
     text-align: center;
     margin: 40px 0;
-    padding-top: 100px;
+}
+
+.contact-desc {
+    padding: 20px 80px;
+}
+
+.contact-desc-detail {
+    display: flex;
+    gap: 40px;
+}
+
+.contact-desc-detail-left {
+    flex: 1;
+}
+
+.contact-desc-detail-left p {
+    color: purple;
+    font-weight: 500;
+    font-size: 30px;
+}
+
+.contact-desc-detail-left span {
+    color: purple;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.contact-desc-detail-right {
+    flex: 1;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.info-item i {
+    color: purple;
+}
+
+.contact-desc-detail-right form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: purple;
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 10px 12px;
+    border: 1px solid purple;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: purple;
+}
+
+.name-input,
+.email-input,
+.phone-input,
+textarea {
+    color: purple;
+}
+
+.contact-submit-button {
+    margin-top: 10px;
+    padding: 12px;
+    border: none;
+    background: purple;
+    color: #f5e07a;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.contact-submit-button:hover {
+    background: #f5e07a;
+    color: purple;
+}
+
+.map-container {
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
 }

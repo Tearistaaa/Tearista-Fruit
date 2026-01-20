@@ -1,16 +1,27 @@
+// Import css
+import '../styling/home.css';
+
+// Import pages
 import Footer from '../components/Footer.jsx';
 import Navbar from '../components/Navbar.jsx';
-import '../styling/home.css';
-import Blog from './Blog.jsx';
+import Arrival from './Arrival.jsx';
+import Banners from './Banner.jsx';
+import Blogs from './Blog.jsx';
 import Contact from './Contact.jsx';
 import Product from './Product.jsx';
+import Service from './Service.jsx';
+import Suppliers from './Supplier.jsx';
 
 function Home() {
     return(
         <>
             <Navbar />
+            <Banners />
+            <Arrival />
             <Product />
-            <Blog />
+            <Service />
+            <Suppliers />
+            <Blogs />
             <Contact />
             <Footer />
         </>

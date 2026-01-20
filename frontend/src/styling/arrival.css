@@ -1,0 +1,21 @@
+.new-arrival-section {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.new-arrival-card-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.new-arrival-card {
+    width: 350px;
+    text-align: center;
+    transition: 0.3s ease-in-out;
+}
+
+.new-arrival-card:hover {
+    transform: scale(1.05);
+}
