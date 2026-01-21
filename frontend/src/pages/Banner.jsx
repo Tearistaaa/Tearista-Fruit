@@ -1,3 +1,4 @@
+// Import css
 import '../styling/banner.css';
 
 // Import Images
