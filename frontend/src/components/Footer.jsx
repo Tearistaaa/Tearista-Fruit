@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+
+// Import css
 import '../styling/footer.css';
 
 function Footer() {
@@ -13,10 +16,10 @@ function Footer() {
                     <div className='footer-col'>
                         <h4>Links</h4>
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Product</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><Link to='/' >Home</Link></li>
+                            <li><Link to='/product' >Product</Link></li>
+                            <li><Link to='/blog' >Blog</Link></li>
+                            <li><Link to='/contact' >Contact</Link></li>
                         </ul>
                     </div>
 
