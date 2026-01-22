@@ -1,5 +1,10 @@
+import { Link } from 'react-router-dom';
+
 // Import css
 import '../styling/banner.css';
+
+// Import Motion
+import MotionImage from '../components/motion-animation/MotionImage';
 
 // Import Images
 import Banner from '../images/banner/banner.jpeg';
@@ -8,7 +13,7 @@ function Banners() {
     return (
         <>
             <div className='banner-section'>
-                <img src={Banner} alt='Banner' />
+                <MotionImage src={Banner} alt='Logo Banner'/>
                 <div className='banner-text'>
                     <h3 className='banner-text-category'>Organic Fruit</h3>
                     <h1 className='banner-text-desc'>
@@ -16,14 +21,14 @@ function Banners() {
                         <span>Spring Sale</span>
                     </h1>
 
-                    <button className='banner-button'>
+                    <Link to ='/product' className='banner-button'>
                         Shop Now
                         <i className='fas fa-long-arrow-alt-right'></i>
-                    </button>
+                    </Link>
                 </div>
             </div>
         </>
-    )
+    );
 }
 
 export default Banners;

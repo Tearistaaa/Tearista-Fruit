@@ -1,6 +1,3 @@
-// Import css
-import '../styling/home.css';
-
 // Import Pages
 import Arrival from '../pages/Arrival.jsx';
 import Banners from '../pages/Banner.jsx';
