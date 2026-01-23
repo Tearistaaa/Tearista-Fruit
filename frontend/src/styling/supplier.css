@@ -11,13 +11,50 @@
 }
 
 .supplier-card {
-    width: 200px;
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
+    width: 200px;
     text-align: center;
 }
 
 .supplier-card img {
     width: 100%;
     height: auto;
+}
+
+@media (max-width: 1024px) {
+    .title {
+        font-size: 30px;
+    }
+
+    .supplier-card {
+        width: 70%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 28px;
+    }
+
+    .supplier-card {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 24px;
+    }
+
+    .supplier-card-container {
+        gap: 10px;
+    }
+
+    .supplier-card {
+        width: 100%;
+        margin: 0 auto;
+    }
 }

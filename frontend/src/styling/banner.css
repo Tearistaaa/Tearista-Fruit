@@ -57,3 +57,46 @@
     background: purple;
     color: #f5e07a;
 }
+
+/* RESPONSIVE */
+@media (max-width: 1024) {
+    .banner-text {
+        left: 10%;
+    }
+
+    .banner-text h1 {
+        font-size: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .banner-section img {
+        height: 70vh;
+    }
+
+    .banner-text {
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 90%;
+    }
+
+    .banner-text h1 {
+        font-size: 36px;
+    }
+
+    .banner-text h3 {
+        font-size: 18px;
+    }
+
+    .banner-button {
+        font-size: 16px;
+        padding: 10px 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner-text h1 {
+        font-size: 28px;
+    }
+}

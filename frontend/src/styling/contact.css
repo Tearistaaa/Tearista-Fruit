@@ -68,18 +68,17 @@
     border-radius: 6px;
     font-size: 14px;
     outline: none;
+    color: purple;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     border-color: purple;
-}
-
-.name-input,
-.email-input,
-.phone-input,
-textarea {
-    color: purple;
 }
 
 .contact-submit-button {
@@ -103,4 +102,77 @@ textarea {
     margin-top: 20px;
     border-radius: 10px;
     overflow: hidden;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .title {
+        font-size: 30px;
+    }
+
+    .contact-desc {
+        padding: 20px 40px;
+    }
+
+    .contact-desc-detail {
+        gap: 30px;
+    }
+
+    .contact-desc-detail-left p {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 28px;
+    }
+
+    .contact-desc {
+        padding: 20px 20px;
+    }
+
+    .contact-desc-detail {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .contact-desc-detail-left p {
+        font-size: 24px;
+    }
+
+    .contact-desc-detail-left span {
+        font-size: 16px;
+    }
+
+    .contact-submit-button {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 24px;
+    }
+
+    .contact-header-text {
+        margin-top: 30px;
+    }
+
+    .contact-desc-detail-left p {
+        font-size: 20px;
+    }
+
+    .contact-desc-detail-left span {
+        font-size: 14px;
+    }
+
+    .contact-desc {
+        padding: 10px 10px;
+    }
+
+    .contact-submit-button {
+        font-size: 14px;
+        padding: 10px;
+    }
 }

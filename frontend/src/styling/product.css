@@ -45,3 +45,44 @@
 .search-bar:focus {
     border-color: purple
 }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .title {
+        font-size: 30px;
+    }
+
+    .our-product-card {
+        width: 50%;
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 28px;
+    }
+
+    .search-bar-container {
+        width: 90%;
+    }
+
+    .our-product-card {
+        width: 90%;
+        max-width: 360px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 24px;
+    }
+    
+    .our-product-card {
+        width: 95%;
+    }
+
+    .search-bar-container {
+        width: 80%;
+    }
+}

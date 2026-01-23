@@ -12,10 +12,44 @@
 
 .new-arrival-card {
     width: 350px;
+    max-width: 100%;
     text-align: center;
     transition: 0.3s ease-in-out;
 }
 
 .new-arrival-card:hover {
     transform: scale(1.05);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .title {
+        font-size: 30px;
+    }
+
+    .new-arrival-card {
+        width: 50%;
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 28px;
+    }
+
+    .new-arrival-card {
+        width: 90%;
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 24px;
+    }
+
+    .new-arrival-card {
+        width: 95%;
+    }
 }

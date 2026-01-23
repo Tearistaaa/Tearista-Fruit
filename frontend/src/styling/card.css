@@ -7,7 +7,7 @@
 }
 
 .card-header:hover {
-    transform: scale(1);
+    transform: scale(1.02);
 }
 
 .card-image {
@@ -38,4 +38,27 @@
 .card-name,
 .card-price {
     color: purple;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .card-header {
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-header {
+        max-width: 240px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-header {
+        max-width: 90%;
+    }
+
+    .card-image {
+        height: 200px;
+    }
 }
