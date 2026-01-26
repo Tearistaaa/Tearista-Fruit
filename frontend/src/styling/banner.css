@@ -59,7 +59,7 @@
 }
 
 /* RESPONSIVE */
-@media (max-width: 1024) {
+@media (max-width: 1024px) {
     .banner-text {
         left: 10%;
     }

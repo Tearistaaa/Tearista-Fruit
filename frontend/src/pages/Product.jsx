@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 // Import css
 import '../global.css';
 import '../styling/product.css';
@@ -12,7 +15,42 @@ import Card from '../components/Card';
 import MotionWrapper from '../components/motion-animation/MotionWrapper';
 import ItemProduct from '../data/ProductData';
 
-function Product() {
+function Product({limit, showViewMore = false}) {
+    // Search function
+    const [searchInput, setSearchInput] = useState('');
+    const [selectedName, setSelectedName] = useState('');
+    const [suggestions, setSuggestions] = useState([]);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
+    const handleSearchChange = (e) => {
+        const value = e.target.value;
+        setSearchInput(value);
+
+        if (value.trim() === '') {
+            setSuggestions([]);
+            return;
+        }
+
+        const filtered = ItemProduct.filter(p =>
+            p.name.toLowerCase().includes(value.toLowerCase())
+        );
+        setSuggestions(filtered);
+    };
+
+    const handleSelectSuggestion = (name) => {
+        setSearchInput(name);
+        setSelectedName(name);
+        setSuggestions([]);
+    };
+
+    const displayedProducts = selectedName
+        ? ItemProduct.filter(p => p.name === selectedName)
+        : ItemProduct;
+
+    const visibleProducts = limit
+        ? displayedProducts.slice(0, limit)
+        : displayedProducts;
+
     return(
         <>
             <MotionWrapper delay={0}>
@@ -27,28 +65,70 @@ function Product() {
                     <input
                         type='text'
                         placeholder='Search for a product...'
-                        value=''
-                        onChange={''}
+                        value={searchInput}
+                        onChange={handleSearchChange}
                         className='search-bar'
                         autoComplete='off'
-                    >
-                    </input>
+                    />
+
+                    {searchInput && (
+                        <button
+                            className='clear-btn'
+                            onClick={() => {
+                                setSearchInput('');
+                                setSuggestions([]);
+                                setSelectedName('');
+                            }}
+                        >
+                            ✕
+                        </button>
+                    )}
+
+                    {suggestions.length > 0 ? (
+                        <ul className='suggestions-list'>
+                            {suggestions.map(item => (
+                                <li key={item.name} onClick={() => handleSelectSuggestion(item.name)}>
+                                    {item.name}
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        searchInput && !ItemProduct.some(p => p.name === searchInput) && (
+                            <ul className='suggestions-list'>
+                                <li className='no-search-results'>
+                                    No results for '<strong>{searchInput}</strong>'
+                                </li>
+                            </ul>
+                        )
+                    )}
+                </div>
+
+                <div className='our-product-card-section'>
+                    {visibleProducts.map(ItemProduct => (
+                        <MotionCard key={ItemProduct.name}>
+                            <Card name={ItemProduct.name} price={ItemProduct.price}>
+                                <div
+                                    onClick={() => {
+                                        setSelectedProduct(ItemProduct);
+                                    }}
+                                >
+                                    <div className='card-image'>
+                                        <img src={ItemProduct.img} alt={ItemProduct.name} />
+                                    </div>
+                                </div>
+                            </Card>
+                        </MotionCard>
+                    ))}
+
+                    {showViewMore && (
+                        <div className='view-more-wrapper'>
+                            <Link to='/product' className='view-more-btn'>
+                                View More →
+                            </Link>
+                        </div>
+                    )}
                 </div>
             </MotionWrapper>
-
-            <div className='our-product-card-section'>
-                {ItemProduct.map(product => (
-                    <MotionCard key={product.name}>
-                        <Card name={product.name} price={product.price}>
-                            <div>
-                                <div className='card-image'>
-                                    <img src={product.img} alt={product.name} />
-                                </div>
-                            </div>
-                        </Card>
-                    </MotionCard>
-                ))}
-            </div>
         </>
     );
 }
