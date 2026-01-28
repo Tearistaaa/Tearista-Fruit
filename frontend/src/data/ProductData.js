@@ -1,16 +1,18 @@
 // Import images and dummy data
-import Apple from '../images/fruit-image/apple.webp';
-import Banana from '../images/fruit-image/banana.webp';
-import Durian from '../images/fruit-image/durian.webp';
-import Grape from '../images/fruit-image/grape.webp';
-import Kiwi from '../images/fruit-image/kiwi.webp';
-import Kurma from '../images/fruit-image/kurma.webp';
-import Mango from '../images/fruit-image/mango.webp';
-import Melon from '../images/fruit-image/melon.webp';
-import Orange from '../images/fruit-image/orange.webp';
-import Pear from '../images/fruit-image/pear.webp';
-import Strawberry from '../images/fruit-image/strawberry.webp';
-import Watermelon from '../images/fruit-image/watermelon.webp';
+import Apple from '../images/fruit-image/Apple.png';
+import Banana from '../images/fruit-image/Banana.png';
+import Blueberry from '../images/fruit-image/Blueberry.png';
+import Durian from '../images/fruit-image/Durian.png';
+import Grape from '../images/fruit-image/Grape.png';
+import Kiwi from '../images/fruit-image/Kiwi.png';
+import Kurma from '../images/fruit-image/Kurma.png';
+import Lemon from '../images/fruit-image/Lemon.png';
+import Mango from '../images/fruit-image/Mango.png';
+import Melon from '../images/fruit-image/Melon.png';
+import Orange from '../images/fruit-image/Orange.png';
+import Pear from '../images/fruit-image/Pear.png';
+import Strawberry from '../images/fruit-image/Strawberry.png';
+import Watermelon from '../images/fruit-image/Watermelon.png';
 
 const ItemProduct = [
   {
@@ -65,25 +67,37 @@ const ItemProduct = [
     name: 'Melon',
     price: '$5.99/Kg',
     img: Melon,
-    desc: 'Our premium bananas are carefully selected to ensure optimal ripeness, sweetness, and smooth texture. Ideal for baking, smoothies, or enjoying fresh, they offer a rich, creamy taste that everyone loves. Naturally grown and bursting with flavor, these bananas bring a touch of tropical delight to your daily meals.'
+    desc: 'Our premium melons are carefully harvested to ensure sweet, juicy flesh and refreshing aroma. Perfect for fruit salads, desserts, or enjoying fresh, they bring a cool and sweet taste to every bite.'
   },
   {
     name: 'Orange',
     price: '$5.99/Kg',
     img: Orange,
-    desc: 'Our premium bananas are carefully selected to ensure optimal ripeness, sweetness, and smooth texture. Ideal for baking, smoothies, or enjoying fresh, they offer a rich, creamy taste that everyone loves. Naturally grown and bursting with flavor, these bananas bring a touch of tropical delight to your daily meals.'
+    desc: 'Our premium oranges are handpicked to ensure vibrant, juicy segments bursting with citrus flavor. Ideal for fresh juice, fruit salads, or as a healthy snack, these oranges bring sunshine to your day.'
   },
   {
     name: 'Kiwi',
-    price: '10.99/Kg',
+    price: '9.99/Kg',
     img: Kiwi,
-    desc: 'Test'
+    desc: 'Our premium kiwis are carefully selected for their perfect balance of tartness and sweetness. With their vibrant green flesh and tiny seeds, they are perfect for smoothies, fruits salads, or enjoying fresh. Naturally grown and packed with vitamin C, these kiwis offer a refreshing tropical twist to your meals.'
   },
   {
     name: 'Kurma',
-    price: '10.99/Kg',
+    price: '12.99/Kg',
     img: Kurma,
-    desc: 'Text'
+    desc: 'Our premium dates are naturally sweet, tender, and rich in flavor. Perfect as a healthy snack, in desserts, or paired with nuts, they are full of natural energy and nutrition. Grown under optimal conditions, these dates bring a taste of Middle Eastern luxury to your table.'
+  },
+  {
+    name: 'Lemon',
+    price: '6.99/Kg',
+    img: Lemon,
+    desc: 'Our premium lemons are handpicked for their zesty aroma and tangy flavor. Perfect for fresh juice, cocktails, or as a citrusy addition to your dishes, they add a refreshing, vibrant twist to every meal.'
+  },
+  {
+    name: 'Blueberry',
+    price: '14.99/Kg',
+    img: Blueberry,
+    desc: 'Our premium blueberries are carefully selected for their sweet-tart flavor and juicy texture. Ideal for smoothies, desserts, or enjoying fresh, these blueberries are packed with antioxidants and a burst of natural goodness.'
   }
 ];
 

@@ -1,22 +1,26 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-// Import css
+// Import Css
 import '../global.css';
 import '../styling/product.css';
 
 // Import Motion
 import MotionCard from '../components/motion-animation/MotionCard';
 
-// Import card
+// Import Card
 import Card from '../components/Card';
 
-// Import data
+// Import Modal
+
+// Import Data
+import ModalCard from '../components/ModalCard';
 import MotionWrapper from '../components/motion-animation/MotionWrapper';
 import ItemProduct from '../data/ProductData';
 
 function Product({limit, showViewMore = false}) {
-    // Search function
+
+    // Search Handler
     const [searchInput, setSearchInput] = useState('');
     const [selectedName, setSelectedName] = useState('');
     const [suggestions, setSuggestions] = useState([]);
@@ -128,6 +132,11 @@ function Product({limit, showViewMore = false}) {
                         </div>
                     )}
                 </div>
+
+                <ModalCard
+                    product={selectedProduct}
+                    onClose={() => setSelectedProduct(null)}
+                />
             </MotionWrapper>
         </>
     );

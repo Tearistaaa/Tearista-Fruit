@@ -1,12 +1,12 @@
 // Import image and dummy data
-import Apple from '../images/fruit-image/apple.webp';
-import Banana from '../images/fruit-image/banana.webp';
-import Durian from '../images/fruit-image/durian.webp';
-import Grape from '../images/fruit-image/grape.webp';
-import Kurma from '../images/fruit-image/kurma.webp';
-import Mango from '../images/fruit-image/mango.webp';
-import Pear from '../images/fruit-image/pear.webp';
-import Watermelon from '../images/fruit-image/watermelon.webp';
+import Apple from '../images/fruit-image/Apple.png';
+import Banana from '../images/fruit-image/Banana.png';
+import Durian from '../images/fruit-image/Durian.png';
+import Grape from '../images/fruit-image/Grape.png';
+import Kurma from '../images/fruit-image/Kurma.png';
+import Mango from '../images/fruit-image/Mango.png';
+import Pear from '../images/fruit-image/Pear.png';
+import Watermelon from '../images/fruit-image/Watermelon.png';
 
 const ItemArrival = [
   { name: 'Kurma', price: '$12.70/Kg', img: Kurma, label: 'New' },
