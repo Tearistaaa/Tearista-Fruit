@@ -1,7 +1,7 @@
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { useState } from 'react';
-import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import { useEffect, useState } from 'react';
+import { MapContainer, Marker, TileLayer, useMap } from 'react-leaflet';
 
 // Import Css
 import '../styling/leaflet-address.css';
@@ -17,6 +17,17 @@ L.Icon.Default.mergeOptions({
   iconUrl: markerIcon,
   shadowUrl: markerShadow,
 });
+
+// Refresh Map
+function RecenterMap({ lat, lng }) {
+  const map = useMap();
+
+  useEffect(() => {
+    map.setView([lat, lng]);
+  }, [lat, lng, map]);
+
+  return null;
+}
 
 export function AddressInput({ setAddress, setCoordinates, setShippingFee }) {
   const [query, setQuery] = useState('');
@@ -46,6 +57,14 @@ export function AddressInput({ setAddress, setCoordinates, setShippingFee }) {
     setSuggestions([]);
   };
 
+  const handleClear = () => {
+    setQuery('');
+    setSuggestions([]);
+    setAddress('');
+    setCoordinates({ lat: null, lng: null});
+    setShippingFee(0);
+  };
+
   return (
     <div className="address-wrapper">
       <input
@@ -54,6 +73,16 @@ export function AddressInput({ setAddress, setCoordinates, setShippingFee }) {
         placeholder="Find your location.."
         className="address-input"
       />
+
+      {query && (
+          <span
+            onClick={handleClear}
+            className='address-clear'
+          >
+            <i className='fa fa-times'></i>
+          </span>
+      )}
+
       {suggestions.length > 0 && (
         <ul className="address-suggestions">
           {suggestions.map(place => (
@@ -79,6 +108,7 @@ export function MapPreview({ coordinates }) {
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       <Marker position={[coordinates.lat, coordinates.lng]} />
+      <RecenterMap lat={coordinates.lat} lng={coordinates.lng} />
     </MapContainer>
   );
 }

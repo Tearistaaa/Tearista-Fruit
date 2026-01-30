@@ -11,7 +11,7 @@ function ModalCard({ product, onClose }) {
                     className='modal-close'
                     onClick={onClose}
                 >
-                    ✕
+                    <i className='fa fa-times'></i>
                 </button>
 
                 <div className='modal-image'>
