@@ -1,3 +1,5 @@
+// frontend/src/pages/Blog.jsx
+
 // Import css
 import '../global.css';
 import '../styling/blog.css';
@@ -22,11 +24,12 @@ function Blogs() {
 
             <div className='blog-card-container'>
                 {ItemBlog.map((blog, index) => (
+                    // Hapus type='card' untuk menghilangkan hover bawaan framer motion yang nge-bug
+                    // Gunakan delay manual agar animasi muncul tetap berurutan
                     <MotionWrapper
                         key={index}
                         className='blog-card'
-                        type='card'
-                        index={index}
+                        delay={index * 0.2} 
                     >
                         <div className='blog-card-img'>
                             <img src={blog.img} alt={blog.desc} />

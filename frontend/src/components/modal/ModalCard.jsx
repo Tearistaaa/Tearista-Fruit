@@ -1,5 +1,5 @@
 // Import css
-import '../styling/modalcard.css';
+import '../../styling/modalcard.css';
 
 function ModalCard({ product, onClose }) {
     if (!product) return null;
@@ -7,7 +7,7 @@ function ModalCard({ product, onClose }) {
     return (
         <div className='product-modal'>
             <div className='product-modal-content horizontal'>
-                <button 
+                <button
                     className='modal-close'
                     onClick={onClose}
                 >

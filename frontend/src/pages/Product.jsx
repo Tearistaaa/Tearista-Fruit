@@ -12,9 +12,9 @@ import MotionCard from '../components/motion-animation/MotionCard';
 import Card from '../components/Card';
 
 // Import Modal
+import ModalCard from '../components/modal/ModalCard';
 
 // Import Data
-import ModalCard from '../components/ModalCard';
 import MotionWrapper from '../components/motion-animation/MotionWrapper';
 import ItemProduct from '../data/ProductData';
 
