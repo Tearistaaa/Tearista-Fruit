@@ -49,6 +49,15 @@
     display: none;
 }
 
+.login-button {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+}
+
 .cart-button,
 .login-button,
 .helper-button {
@@ -58,6 +67,8 @@
     color: purple;
     cursor: pointer;
     transition: 0.3s ease-in-out;
+    font-family: inherit;
+    font-weight: 500;
 }
 
 .cart-button:hover,
@@ -73,7 +84,7 @@
     color: purple;
 }
 
-/* RESPONSIVE */
+/* ================= RESPONSIVE ================= */
 @media (max-width: 1024px) {
     .menu-toggle {
         display: block;
@@ -134,7 +145,8 @@
         margin: 10px auto 30px auto;
     }
 
-    .navbar-button-mobile button {
+    .navbar-button-mobile button,
+    .navbar-button-mobile .login-button {
         flex: 1;
         display: flex;
         align-items: center;
@@ -142,15 +154,19 @@
         gap: 8px;
         padding: 12px 0;
         font-size: 18px;
+        font-weight: 500;
+        font-family: inherit;
         color: purple;
         background: none;
         border: 1px solid purple;
         border-radius: 6px;
         cursor: pointer;
         transition: 0.2s ease-in-out;
+        text-decoration: none;
     }
 
-    .navbar-button-mobile button:hover {
+    .navbar-button-mobile button:hover,
+    .navbar-button-mobile .login-button:hover {
         background: purple;
         color: #f5e07a;
     }
@@ -203,7 +219,8 @@
         margin-bottom: 30px;
     }
 
-    .navbar-button-mobile button {
+    .navbar-button-mobile button,
+    .navbar-button-mobile .login-button {
         display: flex;
         flex: 1;
         align-items: center;
@@ -211,15 +228,19 @@
         gap: 8px;
         padding: 12px 0;
         font-size: 14px;
+        font-weight: 500;
+        font-family: inherit;
         color: purple;
         background: none;
         border: 1px solid purple;
         border-radius: 6px;
         cursor: pointer;
         transition: 0.3s ease-in-out;
+        text-decoration: none;
     }
 
-    .navbar-button-mobile button:hover {
+    .navbar-button-mobile button:hover,
+    .navbar-button-mobile .login-button:hover {
         background: purple;
         color: #f5e07a;
     }

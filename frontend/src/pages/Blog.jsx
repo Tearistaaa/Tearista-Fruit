@@ -1,4 +1,4 @@
-// frontend/src/pages/Blog.jsx
+import { Link } from 'react-router-dom';
 
 // Import css
 import '../global.css';
@@ -24,8 +24,6 @@ function Blogs() {
 
             <div className='blog-card-container'>
                 {ItemBlog.map((blog, index) => (
-                    // Hapus type='card' untuk menghilangkan hover bawaan framer motion yang nge-bug
-                    // Gunakan delay manual agar animasi muncul tetap berurutan
                     <MotionWrapper
                         key={index}
                         className='blog-card'
@@ -37,7 +35,7 @@ function Blogs() {
 
                         <div className='blog-card-content'>
                             <h3 className='blog-card-content-desc'>{blog.desc}</h3>
-                            <a href={blog.link} className='read-more'>Read more &gt;</a>
+                            <Link to={`/blog/${blog.id}`} className='read-more'>Read more &gt;</Link>
                         </div>
                     </MotionWrapper>
                 ))}

@@ -2,6 +2,9 @@ import { Route, Routes } from 'react-router-dom';
 
 // Import Element
 import MainLayout from './layouts/MainLayout.jsx';
+import BlogEach from './pages/Blogeach.jsx';
+import Login from './pages/Login.jsx';
+import Signup from './pages/Signup.jsx';
 import BlogPage from './wrapper/BlogPage.jsx';
 import ContactPage from './wrapper/ContactPage.jsx';
 import HomePage from './wrapper/HomePage.jsx';
@@ -15,6 +18,11 @@ function App() {
         <Route path='/product' element={<ProductPage />} />
         <Route path='/blog' element={<BlogPage />} />
         <Route path='/contact' element={<ContactPage />} />
+
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
+
+        <Route path='/blog/:id' element={<BlogEach />} />
       </Route>
     </Routes>
   );

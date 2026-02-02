@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 // Import css
 import '../styling/navbar.css';
@@ -43,14 +43,14 @@ function NavBar() {
                 <div className='navbar-button-mobile'>
                     <button className='helper-button'><i className='fas fa-headset'></i><span>Helper</span></button>
                     <button className='cart-button' onClick={() => setCartOpen(true)}><i className='fas fa-shopping-cart'></i><span>Cart</span></button>
-                    <button className='login-button'><i className='fas fa-user-circle'></i><span>Login</span></button>
+                    <Link to='/login' className='login-button' onClick={closeMenu}><i className='fas fa-user-circle'></i><span>Login</span></Link>
                 </div>
             </div>
 
             <div className='navbar-button'>
                 <button className='helper-button'><i className='fas fa-headset' /></button>
                 <button className='cart-button' onClick={() => setCartOpen(true)}><i className='fas fa-shopping-cart' /></button>
-                <button className='login-button'><i className='fas fa-user-circle' /></button>
+                <Link to='/login' className='login-button'><i className='fas fa-user-circle'></i></Link>
             </div>
 
             <ModalCart
