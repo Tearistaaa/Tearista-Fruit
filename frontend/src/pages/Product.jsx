@@ -84,7 +84,7 @@ function Product({limit, showViewMore = false}) {
                                 setSelectedName('');
                             }}
                         >
-                            ✕
+                            <i className='fa-solid fa-xmark'></i>
                         </button>
                     )}
 

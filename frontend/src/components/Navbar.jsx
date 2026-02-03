@@ -51,6 +51,7 @@ function NavBar() {
                 <button className='helper-button'><i className='fas fa-headset' /></button>
                 <button className='cart-button' onClick={() => setCartOpen(true)}><i className='fas fa-shopping-cart' /></button>
                 <Link to='/login' className='login-button'><i className='fas fa-user-circle'></i></Link>
+
             </div>
 
             <ModalCart
