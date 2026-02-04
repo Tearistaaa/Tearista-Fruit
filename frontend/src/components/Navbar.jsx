@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { useAppContext } from '../context/AppContext';
+
+// Import Pages
+import Profile from '../pages/Profile';
 
 // Import css
 import '../styling/navbar.css';
@@ -7,21 +11,17 @@ import '../styling/navbar.css';
 // Import Modal
 import ModalCart from './modal/ModalCart';
 
-// Import dummy
-import Apple from '../images/fruit-image/Apple.png';
-import Pear from '../images/fruit-image/Pear.png';
-
 function NavBar() {
+    const {user, cartItems, setCartItems} = useAppContext();
     const [menuOpen, setMenuOpen] = useState(false);
     const [cartOpen, setCartOpen] = useState(false);
-    const [cartItems, setCartItems] = useState([
-        { id: 1, name: 'Apple', price: 12.7, qty: 1, image: Apple },
-        { id: 2, name: 'Pear', price: 12.3, qty: 1, image: Pear }
-    ]);
+    const [profileOpen, setProfileOpen] = useState(false);
 
     const closeMenu = () => setMenuOpen(false);
+
     const increaseQty = (id) => setCartItems(items => items.map(item => item.id === id ? { ...item, qty: item.qty + 1 } : item));
-    const decreaseQty = (id) => setCartItems(items => items.map(item => item.id === id && item.qty > 1 ? { ...item, qty: item.qty - 1 } : item));
+    const decreaseQty = (id) => setCartItems(items => items.map(item => item.id === id && item.qty > 1 ? { ...item, qty: item.qty - 1} : item));
+
     const removeItem = (id) => setCartItems(items => items.filter(item => item.id !== id));
 
     return (
@@ -42,15 +42,27 @@ function NavBar() {
 
                 <div className='navbar-button-mobile'>
                     <button className='helper-button'><i className='fas fa-headset'></i><span>Helper</span></button>
-                    <button className='cart-button' onClick={() => setCartOpen(true)}><i className='fas fa-shopping-cart'></i><span>Cart</span></button>
-                    <Link to='/login' className='login-button' onClick={closeMenu}><i className='fas fa-user-circle'></i><span>Login</span></Link>
+                    <button className='cart-button' onClick={() => setCartOpen(true)}>
+                        <i className='fas fa-shopping-cart'></i><span>Cart</span>
+                        {cartItems.length > 0 && <span className='cart-badge'>{cartItems.length}</span>}
+                    </button>
+                    
+                    {user ? (
+                        <Link to='/profile' className='login-button' onClick={closeMenu} style={{ color: '#f5e07a'}}>
+                            <i className='fas fa-user-circle'></i><span>Profile</span>
+                        </Link>
+                    ) : (
+                        <Link to='/login' className='login-button' onClick={closeMenu}>
+                            <i className='fas fa-user-circle'></i><span>Login</span>
+                        </Link>
+                    )}
                 </div>
             </div>
 
             <div className='navbar-button'>
                 <button className='helper-button'><i className='fas fa-headset' /></button>
                 <button className='cart-button' onClick={() => setCartOpen(true)}><i className='fas fa-shopping-cart' /></button>
-                <Link to='/login' className='login-button'><i className='fas fa-user-circle'></i></Link>
+                <Profile />
 
             </div>
 

@@ -9,14 +9,14 @@ import Pear from '../images/fruit-image/Pear.png';
 import Watermelon from '../images/fruit-image/Watermelon.png';
 
 const ItemArrival = [
-  { name: 'Kurma', price: '$12.70/Kg', img: Kurma, label: 'New' },
-  { name: 'Pear', price: '$12.70/Kg', img: Pear, label: 'New' },
-  { name: 'Apple', price: '$15.70/Kg', img: Apple, label: 'New' },
-  { name: 'Grape', price: '$9.55/Kg', img: Grape, label: 'New' },
-  { name: 'Mango', price: '$5.99/Kg', img: Mango, label: 'New' },
-  { name: 'Durian', price: '$6.99/Kg', img: Durian, label: 'New' },
-  { name: 'Watermelon', price: '$7.99/Kg', img: Watermelon, label: 'New' },
-  { name: 'Banana', price: '$12.99/Kg', img: Banana, label: 'New' },
+  { name: 'Kurma', price: 12.70, img: Kurma, label: 'New' },
+  { name: 'Pear', price: 12.70, img: Pear, label: 'New' },
+  { name: 'Apple', price: 15.70, img: Apple, label: 'New' },
+  { name: 'Grape', price: 9.55, img: Grape, label: 'New' },
+  { name: 'Mango', price: 5.99, img: Mango, label: 'New' },
+  { name: 'Durian', price: 6.99, img: Durian, label: 'New' },
+  { name: 'Watermelon', price: 7.99, img: Watermelon, label: 'New' },
+  { name: 'Banana', price: 12.99, img: Banana, label: 'New' },
 ];
 
 export default ItemArrival;

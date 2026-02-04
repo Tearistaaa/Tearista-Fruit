@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
 
 // Import Element
@@ -12,19 +13,23 @@ import ProductPage from './wrapper/ProductPage.jsx';
 
 function App() {
   return (
-    <Routes>
-      <Route element={<MainLayout />}>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/product' element={<ProductPage />} />
-        <Route path='/blog' element={<BlogPage />} />
-        <Route path='/contact' element={<ContactPage />} />
+    <>
+      <Toaster position="top-center" reverseOrder={false} /> 
 
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/product' element={<ProductPage />} />
+          <Route path='/blog' element={<BlogPage />} />
+          <Route path='/contact' element={<ContactPage />} />
 
-        <Route path='/blog/:id' element={<BlogEach />} />
-      </Route>
-    </Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+
+          <Route path='/blog/:id' element={<BlogEach />} />
+        </Route>
+      </Routes>
+    </>
   );
 }
 

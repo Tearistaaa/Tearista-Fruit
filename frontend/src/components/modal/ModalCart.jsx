@@ -11,8 +11,8 @@ function ModalCart({ cartOpen, setCartOpen, cartItems, increaseQty, decreaseQty,
 
     if (!cartOpen) return null;
 
-    const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.qty, 0);
-    const grandTotal = subtotal + shippingFee;
+    const subtotal = cartItems.reduce((sum, item) => sum + Number(item.price) * item.qty, 0);
+    const grandTotal = subtotal + Number(shippingFee);
 
     return (
         <div className='cart-modal-overlay' onClick={() => setCartOpen(false)}>
@@ -34,10 +34,12 @@ function ModalCart({ cartOpen, setCartOpen, cartItems, increaseQty, decreaseQty,
                 {cartItems.map(item => (
                     <div className='cart-row' key={item.id}>
                         <div className='cart-item'>
-                            <img src={item.image} alt={item.name} />
+                            <img src={item.img} alt={item.name} />
                             <span>{item.name}</span>
                         </div>
-                        <span>${item.price.toFixed(2)}/Kg</span>
+                        
+                        <span>${Number(item.price).toFixed(2)}/Kg</span>
+                        
                         <div className='qty-control'>
                             <button onClick={() => decreaseQty(item.id)}>-</button>
                             <span>{item.qty}</span>
@@ -61,7 +63,7 @@ function ModalCart({ cartOpen, setCartOpen, cartItems, increaseQty, decreaseQty,
                     <MapPreview coordinates={coordinates} />
                     
                     {address && <p className='address-preview'>{address}</p>}
-                    {shippingFee > 0 && <p>Shipping Fee: ${shippingFee.toFixed(2)}</p>}
+                    {shippingFee > 0 && <p>Shipping Fee: ${Number(shippingFee).toFixed(2)}</p>}
                 </div>
 
                 <div className='cart-summary'>
@@ -71,7 +73,7 @@ function ModalCart({ cartOpen, setCartOpen, cartItems, increaseQty, decreaseQty,
                     </div>
                     <div className='fee-shipping'>
                         <span>Shipping Fee : </span>
-                        <span>${shippingFee.toFixed(2)}</span>
+                        <span>${Number(shippingFee).toFixed(2)}</span>
                     </div>
                     <div className='grand-total'>
                         <span>Grand Total : </span>
