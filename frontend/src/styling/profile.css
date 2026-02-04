@@ -1,18 +1,15 @@
-/* src/styling/profile.css */
-
-.profile-container {
-    position: relative;
+.profile-trigger {
+    display: flex;
+    align-items: center;
 }
 
 .profile-icon {
-    color: green; /* Warna hijau jika sudah login */
+    color: green;
     border: none;
     background: none;
-    font-size: 20px;
+    font-size: 24px;
     cursor: pointer;
     padding: 0;
-    display: inline-flex;
-    align-items: center;
     transition: 0.3s ease-in-out;
 }
 
@@ -20,50 +17,98 @@
     color: #f5e07a;
 }
 
-.profile-modal {
+.profile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.profile-modal-centered {
+    background: white;
+    width: 300px;
+    padding: 30px 20px;
+    border-radius: 12px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: scaleUp 0.3s ease;
+}
+
+.modal-close-btn {
     position: absolute;
-    right: 0;
-    top: 40px;
-    background: #fff;
-    border: 1px solid purple;
-    padding: 15px;
-    border-radius: 8px;
-    z-index: 1000;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 18px;
     color: purple;
-    min-width: 150px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.modal-close-btn:hover {
+    color: red;
+}
+
+.profile-avatar {
+    font-size: 60px;
+    color: green;
+    margin-bottom: 10px;
 }
 
 .profile-name {
+    font-size: 18px;
     font-weight: bold;
-    margin: 0;
+    color: #333;
+    margin: 5px 0;
 }
 
 .profile-email {
-    font-size: 12px;
+    font-size: 14px;
     color: gray;
-    margin: 5px 0 15px;
+    margin-bottom: 20px;
 }
 
 .logout-button-modal {
     background: red;
-    color: white;
+    color: #fff;
     border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
+    padding: 10px 20px;
+    border-radius: 10px;
     cursor: pointer;
     width: 100%;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 14px;
     transition: 0.2s;
+    box-shadow: 0 2px 5px rgba(255, 77, 77, 0.3);
 }
 
 .logout-button-modal:hover {
-    background: darkred;
+    background: #cc0000;
+    transform: translateY(-2px);
 }
 
 .app-version {
-    font-size: 10px;
-    text-align: center;
-    margin-top: 10px;
-    color: gray;
+    font-size: 11px;
+    color: #ccc;
+    margin-top: 15px;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }

@@ -1,26 +1,26 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-// Import Css
+// IMPORT CSS
 import '../global.css';
 import '../styling/product.css';
 
-// Import Motion
+// IMPORT MOTION
 import MotionCard from '../components/motion-animation/MotionCard';
 
-// Import Card
+// IMPORT CARD
 import Card from '../components/Card';
 
-// Import Modal
+// IMPORT MODAL
 import ModalCard from '../components/modal/ModalCard';
 
-// Import Data
+// IMPORT DATA
 import MotionWrapper from '../components/motion-animation/MotionWrapper';
 import ItemProduct from '../data/ProductData';
 
 function Product({limit, showViewMore = false}) {
 
-    // Search Handler
+    // SEARCH HANDLER
     const [searchInput, setSearchInput] = useState('');
     const [selectedName, setSelectedName] = useState('');
     const [suggestions, setSuggestions] = useState([]);
@@ -127,7 +127,7 @@ function Product({limit, showViewMore = false}) {
                     {showViewMore && (
                         <div className='view-more-wrapper'>
                             <Link to='/product' className='view-more-btn'>
-                                View More →
+                                View More <i class="fas fa-arrow-right"></i>
                             </Link>
                         </div>
                     )}

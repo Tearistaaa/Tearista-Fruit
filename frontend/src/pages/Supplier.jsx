@@ -1,11 +1,11 @@
-// Import css
+// IMPORT CSS
 import '../global.css';
 import '../styling/supplier.css';
 
-// Import Motion
+// IMPORT MOTION
 import MotionWrapper from '../components/motion-animation/MotionWrapper';
 
-// Import data
+// IMPORT DATA
 import ItemSupplier from '../data/SupplierData';
 
 function Suppliers() {

@@ -2,7 +2,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../context/AppContext';
 
-// Import css
+// IMPORT CSS
 import '../../styling/modalcard.css';
 
 function ModalCard({ product, onClose }) {

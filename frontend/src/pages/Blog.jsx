@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 
-// Import css
+// IMPORT CSS
 import '../global.css';
 import '../styling/blog.css';
 
-// Import Motion
+// IMPORT MOTION
 import MotionWrapper from '../components/motion-animation/MotionWrapper';
 
-// Import data
+// IMPORT DATA
 import ItemBlog from '../data/BlogData';
 
 function Blogs() {

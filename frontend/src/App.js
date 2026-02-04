@@ -1,7 +1,7 @@
 import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
 
-// Import Element
+// IMPORT ELEMENT
 import MainLayout from './layouts/MainLayout.jsx';
 import BlogEach from './pages/Blogeach.jsx';
 import Login from './pages/Login.jsx';
@@ -14,7 +14,7 @@ import ProductPage from './wrapper/ProductPage.jsx';
 function App() {
   return (
     <>
-      <Toaster position="top-center" reverseOrder={false} /> 
+      <Toaster position='top-center' reverseOrder={false} /> 
 
       <Routes>
         <Route element={<MainLayout />}>

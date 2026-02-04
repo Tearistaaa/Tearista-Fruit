@@ -1,3 +1,4 @@
+// IMPORT CSS
 import '../styling/card.css';
 
 function Card({ label, img, name, price, children }) {

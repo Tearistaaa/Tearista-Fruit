@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-// Import pages
+// IMPORT PAGES
 import Footer from '../components/Footer.jsx';
 import NavBar from '../components/Navbar.jsx';
 import ScrollToTop from './ScrollToTop.js';

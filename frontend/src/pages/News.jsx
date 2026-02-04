@@ -1,7 +1,7 @@
-// Import css
+// IMPORT CSS
 import '../styling/news.css';
 
-// Import Motion
+// IMPORT MOTION
 import MotionWrapper from '../components/motion-animation/MotionWrapper';
 
 function News() {

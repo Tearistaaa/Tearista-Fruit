@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
 
-// Import css
+// IMPORT CSS
 import '../global.css';
 import '../styling/arrival.css';
 
-// Import Motion
+// IMPORT MOTION
 import MotionCard from '../components/motion-animation/MotionCard.js';
 import MotionWrapper from '../components/motion-animation/MotionWrapper.js';
 
-// Import Card
+// IMPORT CARD
 import Card from '../components/Card.jsx';
 
-// Import data
+// IMPORT DATA
 import ItemArrival from '../data/ArrivalData.js';
 
 function Arrival() {
@@ -40,7 +40,7 @@ function Arrival() {
                                 </div>
                             </Link>
                         </Card>
-                    </MotionCard> 
+                    </MotionCard>
                 ))}
             </div>
         </>

@@ -1,8 +1,8 @@
-// Import css
+// IMPORT CSS
 import '../global.css';
 import '../styling/contact.css';
 
-// Import Motion
+// IMPORT MOTION
 import MotionWrapper from '../components/motion-animation/MotionWrapper';
 
 function Contact() {

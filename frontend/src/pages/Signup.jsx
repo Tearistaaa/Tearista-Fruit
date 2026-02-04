@@ -2,13 +2,13 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 
-// Import Css
+// IMPORT CSS
 import '../styling/auth.css';
 
-// Import Motion
+// IMPORT MOTION
 import MotionWrapper from '../components/motion-animation/MotionWrapper';
 
-// Import Supabase
+// IMPORT SUPABASE
 import { supabase } from '../supabaseClient';
 
 const EyeIcon = () => (
@@ -75,7 +75,7 @@ function Signup() {
         if (validateForm()) {
             setLoading(true);
             
-            const { data, error } = await supabase.auth.signUp({
+            const { error } = await supabase.auth.signUp({
                 email: formData.email,
                 password: formData.password,
                 options: {

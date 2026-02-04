@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 
-// Import css
+// IMPORT CSS
 import '../styling/banner.css';
 
-// Import Motion
+// IMPORT MOTION
 import MotionImage from '../components/motion-animation/MotionImage';
 
-// Import URL
+// IMPORT URL
 const STORAGE_URL = 'https://nmgxcwccfdslbfhmcfqe.supabase.co/storage/v1/object/public/tearista-assets/banner/'
 
 function Banners() {
@@ -24,8 +24,7 @@ function Banners() {
                     </h1>
 
                     <Link to ='/product' className='banner-button'>
-                        Shop Now
-                        <i className='fas fa-long-arrow-alt-right'></i>
+                        Shop Now <i class="fas fa-arrow-right"></i>
                     </Link>
                 </div>
             </div>

@@ -2,13 +2,13 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 
-// Import Css
+// IMPORT CSS
 import '../styling/auth.css';
 
-// Import Motion
+// IMPORT MOTION
 import MotionWrapper from '../components/motion-animation/MotionWrapper';
 
-// Import Supabase
+// IMPORT SUPABASE
 import { supabase } from '../supabaseClient';
 
 const EyeIcon = () => (
@@ -34,12 +34,12 @@ function Login() {
         password: ''
     });
 
-    // Handle Change
+    // HANDLE CHANGE
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    // Validation
+    // HANDLE VALIDATION
     const validateForm = () => {
         const { email, password } = formData;
         
@@ -57,14 +57,14 @@ function Login() {
         return true;
     };
 
-    // Handle Submit
+    // HANDLE SUBMIT
     const handleSubmit = async (e) => {
         e.preventDefault();
         
         if (validateForm()) {
             setLoading(true);
             
-            const { data, error } = await supabase.auth.signInWithPassword({
+            const { error } = await supabase.auth.signInWithPassword({
                 email: formData.email,
                 password: formData.password,
             });

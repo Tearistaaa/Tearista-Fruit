@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-// Import css
+// IMPORT CSS
 import '../styling/footer.css';
 
 function Footer() {

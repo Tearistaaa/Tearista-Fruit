@@ -1,11 +1,11 @@
-// Import css
+// IMPORT CSS
 import '../global.css';
 import '../styling/service.css';
 
-//Import Motion
+// IMPORT MOTION
 import MotionWrapper from '../components/motion-animation/MotionWrapper';
 
-// Import data
+// IMPORT DATA
 import ItemService from '../data/ServiceData';
 
 function Service() {
@@ -20,12 +20,12 @@ function Service() {
                 </div>
             </MotionWrapper>
 
-            <div className="service-card-section">
+            <div className='service-card-section'>
                 {ItemService.map((service, index) => (
                     <MotionWrapper key={index} delay={0}>
-                        <div className="service-card" key={index}>
+                        <div className='service-card' key={index}>
                             <img src={service.img} alt={service.title} />
-                            <h3 className="service-desc">{service.title}</h3>
+                            <h3 className='service-desc'>{service.title}</h3>
                         </div>
                     </MotionWrapper>
                 ))}

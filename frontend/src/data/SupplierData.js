@@ -1,4 +1,4 @@
-// Import URL
+// IMPORT URL
 const STORAGE_URL = 'https://nmgxcwccfdslbfhmcfqe.supabase.co/storage/v1/object/public/tearista-assets/supplier/'
 
 const ItemSupplier = [
