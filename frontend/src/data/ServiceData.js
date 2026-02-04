@@ -1,16 +1,12 @@
-// Import Images and dummy data
-import Eco from '../images/icon/eco.webp';
-import Guarantee from '../images/icon/guarantee.webp';
-import Secure from '../images/icon/secure.webp';
-import Shipping from '../images/icon/shipping.webp';
-import CustomerService from '../images/icon/support.webp';
+// Import URL
+const STORAGE_URL = 'https://nmgxcwccfdslbfhmcfqe.supabase.co/storage/v1/object/public/tearista-assets/service/'
 
 const ItemService = [
-    { img: Shipping, title: 'Fast Shipping'},
-    { img: Guarantee, title: 'Guarantee Fresh'},
-    { img: Eco, title: 'Eco Friendly'},
-    { img: Secure, title: 'Secure Payment'},
-    { img: CustomerService, title: '24/7 Care'}
+    { img: `${STORAGE_URL}shipping.webp`, title: 'Fast Shipping'},
+    { img: `${STORAGE_URL}guarantee.webp`, title: 'Guarantee Fresh'},
+    { img: `${STORAGE_URL}eco.webp`, title: 'Eco Friendly'},
+    { img: `${STORAGE_URL}secure.webp`, title: 'Secure Payment'},
+    { img: `${STORAGE_URL}support.webp`, title: '24/7 Care'}
 ];
 
 export default ItemService;

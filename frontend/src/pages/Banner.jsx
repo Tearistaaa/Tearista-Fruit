@@ -6,14 +6,16 @@ import '../styling/banner.css';
 // Import Motion
 import MotionImage from '../components/motion-animation/MotionImage';
 
-// Import Images
-import Banner from '../images/banner/banner.jpeg';
+// Import URL
+const STORAGE_URL = 'https://nmgxcwccfdslbfhmcfqe.supabase.co/storage/v1/object/public/tearista-assets/banner/'
 
 function Banners() {
+    const bannerImg = `${STORAGE_URL}banner.jpeg`;
+
     return (
         <>
             <div className='banner-section'>
-                <MotionImage src={Banner} alt='Logo Banner'/>
+                <MotionImage src={bannerImg} alt='Banner'/>
                 <div className='banner-text'>
                     <h3 className='banner-text-category'>Organic Fruit</h3>
                     <h1 className='banner-text-desc'>

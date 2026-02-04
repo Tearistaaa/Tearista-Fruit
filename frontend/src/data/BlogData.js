@@ -1,11 +1,10 @@
-// Import images and dummy data
-import BananaBlog from '../images/blog/banana-blog.webp';
-import PearBlog from '../images/blog/pear-blog.webp';
+// Import URL
+const STORAGE_URL = 'https://nmgxcwccfdslbfhmcfqe.supabase.co/storage/v1/object/public/tearista-assets/blog/'
 
 const ItemBlog = [
   {
     id: 1,
-    img: BananaBlog,
+    img: `${STORAGE_URL}banana-blog.webp`,
     title: 'Rico Bananas are the best in the world: What is the secret?',
     desc: 'Rico Bananas are the best in the world: What is the secret?',
     author: 'Rico Stallone',
@@ -21,7 +20,7 @@ const ItemBlog = [
 
   {
     id: 2,
-    img: PearBlog,
+    img: `${STORAGE_URL}pear-blog.webp`,
     title: 'Edward on Pears: seeds and water are the key.',
     desc: 'Edward on Pears: seeds and water are the key',
     author: 'Edward Cullen',
