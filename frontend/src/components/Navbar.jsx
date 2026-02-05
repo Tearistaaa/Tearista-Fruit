@@ -12,7 +12,7 @@ import '../styling/navbar.css';
 import ModalCart from './modal/ModalCart';
 
 function NavBar() {
-    const { user, cartItems } = useAppContext();
+    const { cartItems } = useAppContext();
     
     const [menuOpen, setMenuOpen] = useState(false);
     const [cartOpen, setCartOpen] = useState(false);

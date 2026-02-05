@@ -80,3 +80,51 @@
   margin-top: 15px;
   z-index: 1;
 }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .map-preview {
+    height: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .address-input {
+    padding: 12px;
+  }
+
+  .address-suggestions li {
+    padding: 12px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .address-wrapper {
+    margin-bottom: 15px;
+  }
+
+  .address-input {
+    font-size: 14px;
+    padding: 10px 35px 10px 12px;
+  }
+
+  .address-clear {
+    right: 10px;
+    padding: 8px;
+    font-size: 20px;
+  }
+
+  .address-suggestions {
+    max-height: 160px;
+  }
+
+  .address-suggestions li {
+    font-size: 13px;
+    padding: 12px 15px;
+  }
+
+  .map-preview {
+    height: 180px;
+    margin-top: 10px;
+  }
+}

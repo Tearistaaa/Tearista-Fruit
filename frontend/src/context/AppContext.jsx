@@ -58,19 +58,17 @@ export const AppProvider = ({ children }) => {
     };
 
     const addToCart = async (product) => {
-        let newQty = 1;
         setCartItems(prev => {
             const existing = prev.find(item => item.id === product.id);
             if (existing) {
-                newQty = existing.qty + 1;
-                return prev.map(item => item.id === product.id ? { ...item, qty: item.qty + 1 } : item);
+                return prev.map(item => item.id === product.id ? { ...item, qty: item.qty + 1 } : item)
             }
-            return [...prev, { ...product, qty: 1 }];
-        });
+            return [...prev, { ...product, qty: 1}];
+        })
 
         if (user) {
-            const currentItem = cartItems.find(item => item.id === product.id);
-            const qtyToSave = currentItem ? currentItem.qty + 1 : 1;
+            const existingItem = cartItems.find(item=> item.id === product.id);
+            const qtyToSave = existingItem ? existingItem.qty + 1 : 1;
 
             const { error } = await supabase
                 .from('cart_items')
@@ -79,8 +77,8 @@ export const AppProvider = ({ children }) => {
                     product_id: product.id,
                     quantity: qtyToSave
                 }, { onConflict: 'user_id, product_id' });
-
-            if (error) console.error("Failed to update cart in the database:", error);
+                
+            if (error) console.error('Failed to update cart in the database :', error);
         }
     };
 

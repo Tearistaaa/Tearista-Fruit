@@ -26,8 +26,8 @@ function Profile({ isMobile, closeMenu }) {
     if (isMobile) {
         return (
             <>
-                <a 
-                    className='login-button' 
+                <button
+                    className='login-button'
                     style={{ cursor: 'pointer', color: '#f5e07a' }}
                     onClick={(e) => {
                         e.preventDefault();
@@ -35,14 +35,14 @@ function Profile({ isMobile, closeMenu }) {
                     }}
                 >
                     <i className='fas fa-user-circle'></i>
-                    <span>Profile</span> 
-                </a>
+                    <span>Profile</span>
+                </button>
 
-                <ProfileModal 
-                    user={user} 
-                    logout={logout} 
-                    isOpen={profileOpen} 
-                    setIsOpen={setProfileOpen} 
+                <ProfileModal
+                    user={user}
+                    logout={logout}
+                    isOpen={profileOpen}
+                    setIsOpen={setProfileOpen}
                 />
             </>
         );
@@ -60,11 +60,11 @@ function Profile({ isMobile, closeMenu }) {
                 </button>
             </div>
 
-            <ProfileModal 
-                user={user} 
-                logout={logout} 
-                isOpen={profileOpen} 
-                setIsOpen={setProfileOpen} 
+            <ProfileModal
+                user={user}
+                logout={logout}
+                isOpen={profileOpen}
+                setIsOpen={setProfileOpen}
             />
         </>
     );
@@ -96,7 +96,7 @@ function ProfileModal({ user, logout, isOpen, setIsOpen }) {
                 </div>
             </div>
         </div>,
-        document.body 
+        document.body
     );
 }
 

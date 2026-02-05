@@ -42,7 +42,7 @@ function Contact() {
                         </div>
 
                         <div className='contact-desc-detail-right'>
-                            <form action="">
+                            <form action=''>
                                 <div className='form-group'>
                                     <label htmlFor='name-input'>Name</label>
                                     <input type='text' className='name-input' />
@@ -73,14 +73,14 @@ function Contact() {
             <MotionWrapper delay={0.2}>
                 <div className='map-container'>
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7287282627562!2d103.68398337473795!3d1.3390688986482548!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da0f9cf609d9c5%3A0x669f46937f3dced0!2sBlk%20902%20Jurong%20West%20St%2091!5e0!3m2!1sen!2sid!4v1768903212679!5m2!1sen!2sid"
-                        width="100%"
-                        height="600"
+                        src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7287282627562!2d103.68398337473795!3d1.3390688986482548!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da0f9cf609d9c5%3A0x669f46937f3dced0!2sBlk%20902%20Jurong%20West%20St%2091!5e0!3m2!1sen!2sid!4v1768903212679!5m2!1sen!2sid'
+                        width='100%'
+                        height='600'
                         style={{ border:0 }}
-                        allowFullScreen=""
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                        title="Google Maps"
+                        allowFullScreen=''
+                        loading='lazy'
+                        referrerPolicy='no-referrer-when-downgrade'
+                        title='Google Maps'
                     ></iframe>
                 </div>
             </MotionWrapper>
