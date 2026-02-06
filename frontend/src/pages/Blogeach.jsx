@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 // IMPORT CSS
@@ -7,15 +8,41 @@ import '../styling/blogeach.css';
 // IMPORT MOTION
 import MotionWrapper from '../components/motion-animation/MotionWrapper';
 
-// IMPORT DATA
-import ItemBlog from '../data/BlogData';
+// IMPORT LOADING (BARU)
+import Loading from '../components/Loading';
 
 function BlogEach() {
     const { id } = useParams();
     
-    const blog = ItemBlog.find((item) => item.id === parseInt(id));
+    const [blog, setBlog] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
-    if (!blog) {
+    useEffect(() => {
+        setLoading(true);
+        fetch(`http://localhost:5000/api/blogs/${id}`)
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error("Blog not found");
+                }
+                return res.json();
+            })
+            .then(data => {
+                setBlog(data);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error("Error:", err);
+                setError(true);
+                setLoading(false);
+            });
+    }, [id]);
+
+    if (loading) {
+        return <Loading text="Loading Article..." />;
+    }
+
+    if (error || !blog) {
         return (
             <div className='blog-not-found'>
                 <h2>Blog Post Not Found</h2>
@@ -23,6 +50,10 @@ function BlogEach() {
             </div>
         );
     }
+
+    const dateObj = new Date(blog.created_at);
+    const dateStr = dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    const timeStr = dateObj.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
 
     return (
         <MotionWrapper type='banner'>
@@ -34,29 +65,32 @@ function BlogEach() {
                     
                     <div className='blog-detail-meta'>
                         <div className='blog-meta-item'>
-                            <span>By <strong>{blog.author}</strong></span>
+                            <span>By <strong>{blog.author || 'Admin'}</strong></span>
                         </div>
                         <div className='blog-meta-item'>
                             <span>|</span>
                         </div>
                         <div className='blog-meta-item'>
-                            <span>{blog.date}</span>
+                            <span>{dateStr}</span>
                         </div>
                         <div className='blog-meta-item'>
-                            <span>at {blog.time}</span>
+                            <span>at {timeStr}</span>
                         </div>
                     </div>
                 </header>
 
                 <div className='blog-detail-image-wrapper'>
-                    <img src={blog.img} alt={blog.title} />
+                    <img src={blog.image_url} alt={blog.title} />
                 </div>
 
                 <article className='blog-detail-content'>
-                    {/* Mengubah newline menjadi paragraf */}
-                    {blog.content.split('\n').map((paragraph, idx) => (
-                        <p key={idx}>{paragraph}</p>
-                    ))}
+                    {blog.content ? (
+                        blog.content.split('\n').map((paragraph, idx) => (
+                            <p key={idx}>{paragraph}</p>
+                        ))
+                    ) : (
+                        <p>No content available.</p>
+                    )}
                 </article>
             </div>
         </MotionWrapper>

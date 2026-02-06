@@ -1,19 +1,27 @@
 import { Outlet } from 'react-router-dom';
 
 // IMPORT PAGES
-import Footer from '../components/Footer.jsx';
-import NavBar from '../components/Navbar.jsx';
-import ScrollToTop from './ScrollToTop.js';
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
+import Helper from '../pages/Helper';
+import ScrollToTop from './ScrollToTop';
 
-function MainLayout() {
-    return (
-        <>
-            <ScrollToTop />
-            <NavBar />
-            <Outlet />
-            <Footer />
-        </>
-    );
-}
+const MainLayout = () => {
+  return (
+    <>
+      <Navbar />
+      
+      <ScrollToTop />
+      
+      <main>
+        <Outlet />
+      </main>
+
+      <Footer />
+
+      <Helper />
+    </>
+  );
+};
 
 export default MainLayout;

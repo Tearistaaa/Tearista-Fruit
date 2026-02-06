@@ -119,6 +119,28 @@
     height: 20px;
 }
 
+.auth-forgot-wrapper {
+    text-align: right;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+.auth-forgot-link {
+    color: purple;
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.auth-forgot-link:hover {
+    text-decoration: underline;
+}
+
+.auth-link {
+    cursor: pointer;
+}
+
 input[type='password']::-ms-reveal,
 input[type='password']::-ms-clear {
     display: none;

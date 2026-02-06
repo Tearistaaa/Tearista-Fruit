@@ -35,9 +35,7 @@ function NavBar() {
                     <li><NavLink to='/contact' onClick={closeMenu}>Contact</NavLink></li>
                 </ul>
 
-                <div className='navbar-button-mobile'>
-                    <button className='helper-button'><i className='fas fa-headset'></i><span>Helper</span></button>
-                    
+                <div className='navbar-button-mobile'>                    
                     <button className='cart-button' onClick={() => setCartOpen(true)}>
                         <i className='fas fa-shopping-cart'></i><span>Cart</span>
                         {cartItems.length > 0 && <span className='cart-badge'>{cartItems.length}</span>}
@@ -48,7 +46,6 @@ function NavBar() {
             </div>
 
             <div className='navbar-button'>
-                <button className='helper-button'><i className='fas fa-headset' /></button>
                 <button className='cart-button' onClick={() => setCartOpen(true)}>
                     <i className='fas fa-shopping-cart' />
                 </button>

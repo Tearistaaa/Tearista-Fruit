@@ -20,6 +20,12 @@
     text-align: left;
 }
 
+.banner-text-category {
+    display: inline;
+    border-bottom: 3px solid purple;
+    padding-bottom: 5px;
+}
+
 .banner-text-desc span {
     display: block;
 }

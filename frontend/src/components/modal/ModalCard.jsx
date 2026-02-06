@@ -38,13 +38,15 @@ function ModalCard({ product, onClose }) {
                 </button>
 
                 <div className='modal-image'>
-                    <img src={product.img} alt={product.name} />
+                    <img src={product.image_url || product.img} alt={product.name} />
                 </div>
 
                 <div className='modal-info'>
                     <span className='modal-category'>Tearista Fruit</span>
                     <h2 className='modal-product-name'>{product.name}</h2>
-                    <p className='modal-desc'>{product.desc}</p>
+                    
+                    <p className='modal-desc'>{product.description || product.desc}</p>
+                    
                     <p className='modal-price'>${product.price}/Kg</p>
                     
                     <button className='add-to-cart' onClick={handleAddToCart}>

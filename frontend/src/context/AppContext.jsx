@@ -1,9 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient';
 
-// IMPORT PRODUCT
-import ItemProduct from '../data/ProductData';
-
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
@@ -34,25 +31,39 @@ export const AppProvider = ({ children }) => {
         setLoadingCart(true);
         const { data, error } = await supabase
             .from('cart_items')
-            .select('*')
+            .select(`
+                id,
+                quantity,
+                product_id,
+                products (
+                    id,
+                    name,
+                    price,
+                    image_url,
+                    description
+                )
+            `)
             .eq('user_id', userId);
 
         if (error) {
             console.error('Error fetching cart:', error);
         } else if (data) {
-            const mergedCart = data.map(item => {
-                const productDetails = ItemProduct.find(p => p.id === item.product_id);
+            const formattedCart = data.map(item => {
+                const product = item.products;
                 
-                if (!productDetails) return null;
+                if (!product) return null;
 
                 return {
-                    ...productDetails,
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    img: product.image_url,
                     qty: item.quantity,
-                    db_id: item.id
+                    db_cart_id: item.id
                 };
             }).filter(item => item !== null);
             
-            setCartItems(mergedCart);
+            setCartItems(formattedCart);
         }
         setLoadingCart(false);
     };
@@ -63,36 +74,23 @@ export const AppProvider = ({ children }) => {
             if (existing) {
                 return prev.map(item => item.id === product.id ? { ...item, qty: item.qty + 1 } : item)
             }
-            return [...prev, { ...product, qty: 1}];
-        })
+            const productImg = product.img || product.image_url;
+            return [...prev, { ...product, img: productImg, qty: 1 }];
+        });
 
         if (user) {
-            const existingItem = cartItems.find(item=> item.id === product.id);
-            const qtyToSave = existingItem ? existingItem.qty + 1 : 1;
+            const currentItem = cartItems.find(item => item.id === product.id);
+            const newQty = currentItem ? currentItem.qty + 1 : 1;
 
             const { error } = await supabase
                 .from('cart_items')
                 .upsert({
                     user_id: user.id,
                     product_id: product.id,
-                    quantity: qtyToSave
+                    quantity: newQty
                 }, { onConflict: 'user_id, product_id' });
                 
-            if (error) console.error('Failed to update cart in the database :', error);
-        }
-    };
-
-    const removeFromCart = async (productId) => {
-        setCartItems(items => items.filter(item => item.id !== productId));
-
-        if (user) {
-            const { error } = await supabase
-                .from('cart_items')
-                .delete()
-                .eq('user_id', user.id)
-                .eq('product_id', productId);
-
-            if (error) console.error("Failed to update cart in the database:", error);
+            if (error) console.error('Failed to update cart to DB:', error);
         }
     };
 
@@ -113,12 +111,27 @@ export const AppProvider = ({ children }) => {
                 .eq('user_id', user.id)
                 .eq('product_id', product.id);
             
-            if (error) console.error("Unable to decrease item quantity:", error);
+            if (error) console.error('Unable to decrease item quantity:', error);
+        }
+    };
+
+    // FUNGSI: Hapus Item
+    const removeFromCart = async (productId) => {
+        setCartItems(items => items.filter(item => item.id !== productId));
+
+        if (user) {
+            const { error } = await supabase
+                .from('cart_items')
+                .delete()
+                .eq('user_id', user.id)
+                .eq('product_id', productId);
+
+            if (error) console.error('Failed to remove cart item:', error);
         }
     };
 
     const checkout = async () => {
-        if (!user) return;
+        if (!user) return false;
 
         const { error } = await supabase
             .from('cart_items')
@@ -126,8 +139,8 @@ export const AppProvider = ({ children }) => {
             .eq('user_id', user.id);
 
         if (error) {
-            console.error('Failed to checkout :', error);
-            return false
+            console.error('Failed to checkout:', error);
+            return false;
         } else {
             setCartItems([]);
             return true;

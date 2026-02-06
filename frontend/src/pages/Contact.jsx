@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+
 // IMPORT CSS
 import '../global.css';
 import '../styling/contact.css';
@@ -5,7 +8,44 @@ import '../styling/contact.css';
 // IMPORT MOTION
 import MotionWrapper from '../components/motion-animation/MotionWrapper';
 
+// IMPORT LOADING
+import Loading from '../components/Loading';
+
 function Contact() {
+    const [pageLoading, setPageLoading] = useState(true);
+    
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setPageLoading(false);
+        }, 500);
+    }, []);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+
+        setTimeout(() => {
+            setIsSubmitting(false);
+            
+            toast.success('Message sent successfully!', {
+                duration: 4000,
+                position: 'top-center',
+            });
+            
+            e.target.reset();
+        }, 1000);
+    };
+
+    if (pageLoading) {
+        return <Loading text='Loading Contact...' />;
+    }
+
+    if (isSubmitting) {
+        return <Loading text='Sending your message...' />;
+    }
+
     return(
         <>
             <div className='contact-section'>
@@ -42,15 +82,15 @@ function Contact() {
                         </div>
 
                         <div className='contact-desc-detail-right'>
-                            <form action=''>
+                            <form onSubmit={handleSubmit}>
                                 <div className='form-group'>
                                     <label htmlFor='name-input'>Name</label>
-                                    <input type='text' className='name-input' />
+                                    <input type='text' className='name-input' required />
                                 </div>
 
                                 <div className='form-group'>
                                     <label htmlFor='email-input'>Email</label>
-                                    <input type='email' className='email-input' />
+                                    <input type='email' className='email-input' required />
                                 </div>
 
                                 <div className='form-group'>
@@ -60,7 +100,7 @@ function Contact() {
 
                                 <div className='form-group'>
                                     <label htmlFor='message-input'>Message</label>
-                                    <textarea name='message-input' id=''></textarea>
+                                    <textarea name='message-input' id='' required></textarea>
                                 </div>
 
                                 <button className='contact-submit-button'>Submit</button>

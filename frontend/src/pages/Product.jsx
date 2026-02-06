@@ -1,30 +1,41 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // IMPORT CSS
 import '../global.css';
 import '../styling/product.css';
 
-// IMPORT MOTION
-import MotionCard from '../components/motion-animation/MotionCard';
-
-// IMPORT CARD
+// IMPORT COMPONENTS
 import Card from '../components/Card';
-
-// IMPORT MODAL
 import ModalCard from '../components/modal/ModalCard';
-
-// IMPORT DATA
+import MotionCard from '../components/motion-animation/MotionCard';
 import MotionWrapper from '../components/motion-animation/MotionWrapper';
-import ItemProduct from '../data/ProductData';
 
-function Product({limit, showViewMore = false}) {
+// IMPORT LOADING
+import Loading from '../components/Loading';
+
+function Product({ limit, showViewMore = false }) {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     // SEARCH HANDLER
     const [searchInput, setSearchInput] = useState('');
     const [selectedName, setSelectedName] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/api/products')
+            .then(res => res.json())
+            .then(data => {
+                setProducts(data);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error('Failed to load products:', err);
+                setLoading(false);
+            });
+    }, []);
 
     const handleSearchChange = (e) => {
         const value = e.target.value;
@@ -35,7 +46,7 @@ function Product({limit, showViewMore = false}) {
             return;
         }
 
-        const filtered = ItemProduct.filter(p =>
+        const filtered = products.filter(p =>
             p.name.toLowerCase().includes(value.toLowerCase())
         );
         setSuggestions(filtered);
@@ -48,14 +59,18 @@ function Product({limit, showViewMore = false}) {
     };
 
     const displayedProducts = selectedName
-        ? ItemProduct.filter(p => p.name === selectedName)
-        : ItemProduct;
+        ? products.filter(p => p.name === selectedName)
+        : products;
 
     const visibleProducts = limit
         ? displayedProducts.slice(0, limit)
         : displayedProducts;
 
-    return(
+    if (loading) {
+        return <Loading text='Loading Fresh Products...' />;
+    }
+
+    return (
         <>
             <MotionWrapper delay={0}>
                 <div className='our-product-section'>
@@ -91,13 +106,13 @@ function Product({limit, showViewMore = false}) {
                     {suggestions.length > 0 ? (
                         <ul className='suggestions-list'>
                             {suggestions.map(item => (
-                                <li key={item.name} onClick={() => handleSelectSuggestion(item.name)}>
+                                <li key={item.id} onClick={() => handleSelectSuggestion(item.name)}>
                                     {item.name}
                                 </li>
                             ))}
                         </ul>
                     ) : (
-                        searchInput && !ItemProduct.some(p => p.name === searchInput) && (
+                        searchInput && !products.some(p => p.name === searchInput) && (
                             <ul className='suggestions-list'>
                                 <li className='no-search-results'>
                                     No results for '<strong>{searchInput}</strong>'
@@ -108,16 +123,23 @@ function Product({limit, showViewMore = false}) {
                 </div>
 
                 <div className='our-product-card-section'>
-                    {visibleProducts.map(ItemProduct => (
-                        <MotionCard key={ItemProduct.name}>
-                            <Card name={ItemProduct.name} price={ItemProduct.price}>
+                    {visibleProducts.map(item => (
+                        <MotionCard key={item.id}>
+                            <Card
+                                name={item.name} 
+                                price={item.price} 
+                                img={item.image_url} 
+                            >
                                 <div
                                     onClick={() => {
-                                        setSelectedProduct(ItemProduct);
+                                        setSelectedProduct({
+                                            ...item,
+                                            img: item.image_url
+                                        });
                                     }}
                                 >
                                     <div className='card-image'>
-                                        <img src={ItemProduct.img} alt={ItemProduct.name} />
+                                        <img src={item.image_url} alt={item.name} />
                                     </div>
                                 </div>
                             </Card>
@@ -127,7 +149,7 @@ function Product({limit, showViewMore = false}) {
                     {showViewMore && (
                         <div className='view-more-wrapper'>
                             <Link to='/product' className='view-more-btn'>
-                                View More <i class="fas fa-arrow-right"></i>
+                                View More <i className='fas fa-arrow-right'></i>
                             </Link>
                         </div>
                     )}
