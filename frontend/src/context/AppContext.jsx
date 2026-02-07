@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient';
 
 const AppContext = createContext();
@@ -7,27 +7,9 @@ export const AppProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [cartItems, setCartItems] = useState([]);
     const [loadingCart, setLoadingCart] = useState(false);
+    const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-    useEffect(() => {
-        supabase.auth.getSession().then(({ data: { session } }) => {
-            setUser(session?.user ?? null);
-            if (session?.user) fetchCart(session.user.id);
-        });
-
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-            const currentUser = session?.user ?? null;
-            setUser(currentUser);
-            if (currentUser) {
-                fetchCart(currentUser.id);
-            } else {
-                setCartItems([]);
-            }
-        });
-
-        return () => subscription.unsubscribe();
-    }, []);
-
-    const fetchCart = async (userId) => {
+    const fetchCart = useCallback(async (userId) => {
         setLoadingCart(true);
         const { data, error } = await supabase
             .from('cart_items')
@@ -50,7 +32,6 @@ export const AppProvider = ({ children }) => {
         } else if (data) {
             const formattedCart = data.map(item => {
                 const product = item.products;
-                
                 if (!product) return null;
 
                 return {
@@ -58,6 +39,7 @@ export const AppProvider = ({ children }) => {
                     name: product.name,
                     price: product.price,
                     img: product.image_url,
+                    description: product.description,
                     qty: item.quantity,
                     db_cart_id: item.id
                 };
@@ -66,22 +48,44 @@ export const AppProvider = ({ children }) => {
             setCartItems(formattedCart);
         }
         setLoadingCart(false);
-    };
+    }, []);
+
+    useEffect(() => {
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            const currentUser = session?.user ?? null;
+            setUser(currentUser);
+            if (currentUser) fetchCart(currentUser.id);
+        });
+
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            const currentUser = session?.user ?? null;
+            setUser(currentUser);
+            if (currentUser) {
+                fetchCart(currentUser.id);
+            } else {
+                setCartItems([]);
+            }
+        });
+
+        return () => subscription.unsubscribe();
+    }, [fetchCart]);
 
     const addToCart = async (product) => {
+        const existingItem = cartItems.find(item => item.id === product.id);
+        
+        const newQty = existingItem ? existingItem.qty + 1 : 1;
+        const productImg = product.img || product.image_url;
+
         setCartItems(prev => {
-            const existing = prev.find(item => item.id === product.id);
-            if (existing) {
-                return prev.map(item => item.id === product.id ? { ...item, qty: item.qty + 1 } : item)
+            if (existingItem) {
+                return prev.map(item => 
+                    item.id === product.id ? { ...item, qty: newQty } : item
+                );
             }
-            const productImg = product.img || product.image_url;
             return [...prev, { ...product, img: productImg, qty: 1 }];
         });
 
         if (user) {
-            const currentItem = cartItems.find(item => item.id === product.id);
-            const newQty = currentItem ? currentItem.qty + 1 : 1;
-
             const { error } = await supabase
                 .from('cart_items')
                 .upsert({
@@ -95,19 +99,21 @@ export const AppProvider = ({ children }) => {
     };
 
     const decreaseQty = async (product) => {
-        if (product.qty === 1) {
+        if (product.qty <= 1) {
             removeFromCart(product.id);
             return;
         }
 
+        const newQty = product.qty - 1;
+
         setCartItems(prev => prev.map(item => 
-            item.id === product.id ? { ...item, qty: item.qty - 1 } : item
+            item.id === product.id ? { ...item, qty: newQty } : item
         ));
 
         if (user) {
             const { error } = await supabase
                 .from('cart_items')
-                .update({ quantity: product.qty - 1 })
+                .update({ quantity: newQty })
                 .eq('user_id', user.id)
                 .eq('product_id', product.id);
             
@@ -115,7 +121,6 @@ export const AppProvider = ({ children }) => {
         }
     };
 
-    // FUNGSI: Hapus Item
     const removeFromCart = async (productId) => {
         setCartItems(items => items.filter(item => item.id !== productId));
 
@@ -130,30 +135,68 @@ export const AppProvider = ({ children }) => {
         }
     };
 
-    const checkout = async () => {
+    const checkout = async (orderData) => {
         if (!user) return false;
 
-        const { error } = await supabase
-            .from('cart_items')
-            .delete()
-            .eq('user_id', user.id);
+        const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.qty), 0);
+        const total = subtotal + (orderData?.shippingFee || 0);
 
-        if (error) {
-            console.error('Failed to checkout:', error);
+        try {
+            const response = await fetch('http://localhost:5000/api/orders', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: user.email,
+                    items: cartItems,
+                    total_price: total,
+                    address: orderData.address,
+                    payment_method: orderData.paymentMethod,
+                    shipping_fee: orderData.shippingFee
+                })
+            });
+
+            if (response.ok) {
+                const { error } = await supabase
+                    .from('cart_items')
+                    .delete()
+                    .eq('user_id', user.id);
+
+                if (error) {
+                    console.error('Failed to clear cart DB:', error);
+                } else {
+                    setCartItems([]);
+                    return true;
+                }
+            } else {
+                console.error('Server failed to save order');
+                return false;
+            }
+        } catch (error) {
+            console.error('Checkout error:', error);
             return false;
-        } else {
-            setCartItems([]);
-            return true;
         }
-    }
+    };
 
     const logout = async () => {
         await supabase.auth.signOut();
         setCartItems([]);
+        setUser(null);
     };
 
     return (
-        <AppContext.Provider value={{ user, cartItems, setCartItems, addToCart, removeFromCart, decreaseQty, logout, loadingCart, checkout }}>
+        <AppContext.Provider value={{
+            user,
+            cartItems,
+            setCartItems,
+            addToCart,
+            removeFromCart,
+            decreaseQty,
+            logout,
+            loadingCart,
+            checkout,
+            isProfileOpen,
+            setIsProfileOpen
+        }}>
             {children}
         </AppContext.Provider>
     );

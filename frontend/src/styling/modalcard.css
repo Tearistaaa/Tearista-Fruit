@@ -93,6 +93,7 @@
     font-size: 21px;
     cursor: pointer;
     color: purple;
+    transition: 0.3s ease-in-out;
 }
 
 /* RESPONSIVE */

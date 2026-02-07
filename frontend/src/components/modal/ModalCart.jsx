@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../context/AppContext';
 import { AddressInput, MapPreview } from '../../maps/LeafletAddress';
 
@@ -11,8 +10,7 @@ import '../../styling/modalcart.css';
 import paymentMethods from '../../data/PaymentData';
 
 function ModalCart({ cartOpen, setCartOpen }) {
-    const navigate = useNavigate();
-    const { cartItems, addToCart, decreaseQty, removeFromCart, checkout } = useAppContext();
+    const { cartItems, addToCart, decreaseQty, removeFromCart, checkout, setIsProfileOpen } = useAppContext();
 
     const [address, setAddress] = useState('');
     const [shippingFee, setShippingFee] = useState(0);
@@ -27,6 +25,8 @@ function ModalCart({ cartOpen, setCartOpen }) {
 
     const subtotal = cartItems.reduce((sum, item) => sum + Number(item.price) * item.qty, 0);
     const grandTotal = subtotal + Number(shippingFee);
+
+    const activeMethod = paymentMethods.find(p => p.id === selectedPayment);
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -43,11 +43,14 @@ function ModalCart({ cartOpen, setCartOpen }) {
         if (!selectedPayment) return toast.error('Please select a payment method!');
         if (!paymentProof) return toast.error('Please upload the payment proof screenshot!');
 
-        const isSuccess = await checkout();
+        const isSuccess = await checkout({
+            address: address,
+            shippingFee: Number(shippingFee),
+            paymentMethod: activeMethod.name
+        });
 
         if (isSuccess) {
-            const method = paymentMethods.find(p => p.id === selectedPayment);
-            toast.success(`Checkout via ${method.name} successful!`, { duration: 3000 });
+            toast.success(`Checkout via ${activeMethod.name} successful!`, { duration: 3000 });
 
             setAddress('');
             setCoordinates({ lat: null, lng: null });
@@ -56,13 +59,12 @@ function ModalCart({ cartOpen, setCartOpen }) {
             setPaymentProof(null);
             setPreviewImage(null);
             setCartOpen(false);
-            navigate('/product');
+            setIsProfileOpen(true);
+            
         } else {
             toast.error(`Checkout failed. Please try again.`);
         }
     };
-
-    const activeMethod = paymentMethods.find(p => p.id === selectedPayment);
 
     return (
         <div className='cart-modal-overlay' onClick={() => setCartOpen(false)}>
@@ -180,7 +182,7 @@ function ModalCart({ cartOpen, setCartOpen }) {
                                         />
                                         <div className='file-visual'>
                                             <i className='fas fa-cloud-upload-alt'></i>
-                                            <span>{paymentProof ? paymentProof.name : 'Click to upload screenshoot'}</span>
+                                            <span>{paymentProof ? paymentProof.name : 'Click to Upload Screenshoot'}</span>
                                         </div>
                                     </div>
 

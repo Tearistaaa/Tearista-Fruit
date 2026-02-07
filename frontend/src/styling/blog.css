@@ -56,7 +56,6 @@
     text-align: left;
 }
 
-/* Judul Blog */
 .blog-card-content-desc {
     color: purple;
     font-size: 20px;
@@ -133,7 +132,6 @@
     }
 }
 
-/* Mobile (Max 480px) */
 @media (max-width: 480px) {
     .blog-card-container {
         grid-template-columns: 1fr;

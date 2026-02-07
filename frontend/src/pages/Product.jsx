@@ -126,9 +126,9 @@ function Product({ limit, showViewMore = false }) {
                     {visibleProducts.map(item => (
                         <MotionCard key={item.id}>
                             <Card
-                                name={item.name} 
-                                price={item.price} 
-                                img={item.image_url} 
+                                name={item.name}
+                                price={item.price}
+                                img={item.image_url}
                             >
                                 <div
                                     onClick={() => {
