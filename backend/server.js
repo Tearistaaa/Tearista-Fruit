@@ -25,7 +25,7 @@ app.get('/api/arrivals', async (req, res) => {
     const { data, error } = await supabase
         .from('products')
         .select('*')
-        .order('created_at', { ascending: false })
+        .order('id', { ascending: false })
         .limit(8);
 
     if (error) return res.status(500).json({ error: error.message });
