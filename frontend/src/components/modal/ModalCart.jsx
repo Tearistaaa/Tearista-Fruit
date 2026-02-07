@@ -7,19 +7,17 @@ import { AddressInput, MapPreview } from '../../maps/LeafletAddress';
 // IMPORT CSS
 import '../../styling/modalcart.css';
 
-// IMPORT DATA (Pastikan path ini sesuai dengan struktur folder kamu)
+// IMPORT DATA
 import paymentMethods from '../../data/PaymentData';
 
 function ModalCart({ cartOpen, setCartOpen }) {
     const navigate = useNavigate();
     const { cartItems, addToCart, decreaseQty, removeFromCart, checkout } = useAppContext();
 
-    // State Alamat & Ongkir
     const [address, setAddress] = useState('');
     const [shippingFee, setShippingFee] = useState(0);
     const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
 
-    // State Pembayaran
     const [selectedPayment, setSelectedPayment] = useState(null);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [paymentProof, setPaymentProof] = useState(null);
@@ -27,11 +25,9 @@ function ModalCart({ cartOpen, setCartOpen }) {
 
     if (!cartOpen) return null;
 
-    // Hitung Total
     const subtotal = cartItems.reduce((sum, item) => sum + Number(item.price) * item.qty, 0);
     const grandTotal = subtotal + Number(shippingFee);
 
-    // Handle Upload Gambar
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -40,7 +36,6 @@ function ModalCart({ cartOpen, setCartOpen }) {
         }
     };
 
-    // Handle Checkout
     const handleCheckout = async () => {
         if (cartItems.length === 0) return toast.error(`Your cart is empty!`);
         if (!address) return toast.error(`Please fill in the shipping address.`);
@@ -54,7 +49,6 @@ function ModalCart({ cartOpen, setCartOpen }) {
             const method = paymentMethods.find(p => p.id === selectedPayment);
             toast.success(`Checkout via ${method.name} successful!`, { duration: 3000 });
 
-            // Reset Semua State
             setAddress('');
             setCoordinates({ lat: null, lng: null });
             setShippingFee(0);
@@ -68,20 +62,17 @@ function ModalCart({ cartOpen, setCartOpen }) {
         }
     };
 
-    // Helper: Ambil data metode pembayaran yang sedang dipilih
     const activeMethod = paymentMethods.find(p => p.id === selectedPayment);
 
     return (
         <div className='cart-modal-overlay' onClick={() => setCartOpen(false)}>
             <div className='cart-modal cart-large' onClick={(e) => e.stopPropagation()}>
                 
-                {/* HEADER */}
                 <div className='cart-modal-header'>
                     <h2>My Cart ({cartItems.length})</h2>
                     <button className='close-btn' onClick={() => setCartOpen(false)}>&times;</button>
                 </div>
 
-                {/* TABLE HEADER (Muncul di Desktop, Hilang di Mobile) */}
                 <div className='cart-table-header'>
                     <span>Items</span>
                     <span>Price</span>
@@ -89,7 +80,6 @@ function ModalCart({ cartOpen, setCartOpen }) {
                     <span>Action</span>
                 </div>
 
-                {/* ITEM LIST */}
                 {cartItems.length > 0 ? (
                     cartItems.map(item => (
                         <div className='cart-row' key={item.id}>
@@ -112,7 +102,6 @@ function ModalCart({ cartOpen, setCartOpen }) {
                     <div className='empty-msg'>Cart is empty.</div>
                 )}
 
-                {/* DELIVERY SECTION */}
                 <div className='delivery-section'>
                     <h3>Delivery Address</h3>
                     <AddressInput setAddress={setAddress} setCoordinates={setCoordinates} setShippingFee={setShippingFee} />
@@ -120,7 +109,6 @@ function ModalCart({ cartOpen, setCartOpen }) {
                     
                     {address && <p className='address-preview'>{address}</p>}
                     
-                    {/* TAMPILAN SHIPPING FEE DI BAWAH MAP */}
                     {shippingFee > 0 && (
                         <p className='shipping-fee-text'>
                             Shipping Fee: ${Number(shippingFee).toFixed(2)}
@@ -128,12 +116,10 @@ function ModalCart({ cartOpen, setCartOpen }) {
                     )}
                 </div>
 
-                {/* PAYMENT SECTION */}
                 {cartItems.length > 0 && (
                     <div className='payment-section'>
                         <h3>Payment Method</h3>
 
-                        {/* Dropdown */}
                         <div className='custom-dropdown'>
                             <div 
                                 className={`dropdown-header ${isDropdownOpen ? 'open' : ''}`} 
@@ -169,7 +155,6 @@ function ModalCart({ cartOpen, setCartOpen }) {
                             )}
                         </div>
 
-                        {/* Detail Transfer & Upload */}
                         {selectedPayment && (
                             <div className='payment-detail-container'>
                                 <div className='payment-info-box'>
@@ -210,14 +195,12 @@ function ModalCart({ cartOpen, setCartOpen }) {
                     </div>
                 )}
 
-                {/* SUMMARY */}
                 <div className='cart-summary'>
                     <div><span>Sub Total:</span> <span>${subtotal.toFixed(2)}</span></div>
                     <div><span>Shipping:</span> <span>${Number(shippingFee).toFixed(2)}</span></div>
                     <div className='grand-total'><span>Total:</span> <span>${grandTotal.toFixed(2)}</span></div>
                 </div>
 
-                {/* BUTTON */}
                 <button className='checkout-btn full' onClick={handleCheckout}>
                     Proceed to Order
                 </button>

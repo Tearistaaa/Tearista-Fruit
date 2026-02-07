@@ -48,7 +48,7 @@ function Blogs() {
                     <MotionWrapper
                         key={blog.id}
                         className='blog-card'
-                        delay={index * 0.2}
+                        delay={index * 0.1}
                     >
                         <div className='blog-card-img'>
                             <img src={blog.image_url} alt={blog.title} />
@@ -56,7 +56,9 @@ function Blogs() {
 
                         <div className='blog-card-content'>
                             <h3 className='blog-card-content-desc'>{blog.title}</h3>
-                            <Link to={`/blog/${blog.id}`} className='read-more'>Read more &gt;</Link>
+                            <Link to={`/blog/${blog.id}`} className='read-more'>
+                                Read more
+                            </Link>
                         </div>
                     </MotionWrapper>
                 ))}
