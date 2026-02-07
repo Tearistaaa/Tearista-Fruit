@@ -177,6 +177,24 @@ export const AppProvider = ({ children }) => {
         }
     };
 
+    const updateUserProfile = async (newName) => {
+        try {
+            const { data, error } = await supabase.auth.updateUser({
+                data: { full_name: newName }
+            });
+
+            if (error) throw error;
+
+            if (data.user) {
+                setUser(data.user);
+                return true;
+            }
+        } catch (error) {
+            console.error('Error updating Profile:', error.message);
+            return false;
+        }
+    };
+
     const logout = async () => {
         await supabase.auth.signOut();
         setCartItems([]);
@@ -195,7 +213,8 @@ export const AppProvider = ({ children }) => {
             loadingCart,
             checkout,
             isProfileOpen,
-            setIsProfileOpen
+            setIsProfileOpen,
+            updateUserProfile
         }}>
             {children}
         </AppContext.Provider>

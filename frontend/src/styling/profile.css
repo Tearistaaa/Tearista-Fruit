@@ -89,6 +89,91 @@
     color: #666;
 }
 
+.name-display-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.edit-icon-btn {
+    background: none;
+    border: none;
+    color: purple;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 5px;
+    transition: 0.3s ease-in-out;
+}
+
+.edit-icon-btn:hover {
+    color: green;
+}
+
+.name-edit-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin: 5px 0;
+}
+
+.name-edit-input {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 18px;
+    width: 180px;
+    text-align: center;
+    font-weight: 700;
+    color: purple;
+    border: none;
+    background: #f8f0fc;
+    box-shadow: 0 4px 10px rgba(128, 0, 128, 0.15);
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.name-edit-input:focus {
+    background: #fff;
+    box-shadow: 0 6px 15px rgba(128, 0, 128, 0.3);
+    transform: translateY(-2px);
+}
+
+.name-edit-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.save-btn,
+.cancel-btn {
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 12px;
+}
+
+.save-btn {
+    background: #4caf50;
+}
+
+.cancel-btn {
+    background: #f44336;
+}
+
+.save-btn:hover {
+    background: #45a049;
+}
+
+.cancel-btn:hover {
+    background: #d32f2f;
+}
+
 .order-history-section {
     text-align: left;
     margin-bottom: 20px;

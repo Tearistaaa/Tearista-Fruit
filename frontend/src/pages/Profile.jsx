@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 
@@ -32,7 +33,7 @@ const OrderTimer = ({ createdAt, onExpired }) => {
 };
 
 function Profile({ isMobile, closeMenu }) {
-    const { user, logout, isProfileOpen, setIsProfileOpen } = useAppContext();
+    const { user, logout, isProfileOpen, setIsProfileOpen, updateUserProfile } = useAppContext();
     
     const [orders, setOrders] = useState([]);
 
@@ -101,12 +102,33 @@ function Profile({ isMobile, closeMenu }) {
                 setIsOpen={setIsProfileOpen}
                 orders={orders}
                 handleOrderExpired={handleOrderExpired}
+                updateUserProfile={updateUserProfile}
             />
         </>
     );
 }
 
-function ProfileModal({ user, logout, isOpen, setIsOpen, orders, handleOrderExpired }) {
+function ProfileModal({ user, logout, isOpen, setIsOpen, orders, handleOrderExpired, updateUserProfile }) {
+    const [isEditing, setIsEditing] = useState(false);
+    const [newName, setNewName] = useState('');
+
+    useEffect(() => {
+        if (isOpen && user) {
+            setNewName(user.user_metadata?.full_name || 'User');
+        }
+    }, [isOpen, user]);
+
+    const handleSaveName = async () => {
+        if (!newName.trim()) return toast.error('Name Cannot be Empty!');
+
+        const success = await updateUserProfile(newName);
+        if (success) {
+            setIsEditing(false);
+            toast.success('Username Updated!');
+        } else {
+            toast.error('Failed to Update Username.');
+        }
+    };
     if (!isOpen) return null;
 
     return createPortal(
@@ -122,7 +144,33 @@ function ProfileModal({ user, logout, isOpen, setIsOpen, orders, handleOrderExpi
                         <div className='profile-avatar'>
                             <i className='fas fa-user-circle'></i>
                         </div>
-                        <h3 className='profile-name'>{user.user_metadata?.full_name || 'User'}</h3>
+
+                        {isEditing ? (
+                            <div className='name-edit-container'>
+                                <input
+                                    type='text'
+                                    value={newName}
+                                    onChange={(e) => setNewName(e.target.value)}
+                                    className='name-edit-input'
+                                    autoFocus
+                                />
+                                    <div className='name-edit-actions'>
+                                        <button onClick={handleSaveName} className='save-btn'>
+                                            <i className='fas fa-check'></i>
+                                        </button>
+                                        <button onClick={() => setIsEditing(false)} className='cancel-btn'>
+                                            <i className='fas fa-times'></i>
+                                        </button>
+                                    </div>
+                            </div>
+                        ) : (
+                            <div className='name-display-container'>
+                                <h3 className='profile-name'>{user.user_metadata?.full_name || 'User'}</h3>
+                                <button className='edit-icon-btn' onClick={() => setIsEditing(true)}>
+                                    <i className='fas fa-pen'></i>
+                                </button>
+                            </div>
+                        )}
                         <p className='profile-email'>{user.email}</p>
                     </div>
 
