@@ -184,10 +184,10 @@ function ProfileModal({ user, logout, isOpen, setIsOpen, orders, handleOrderExpi
                                     <p>No active orders right now.</p>
                                 </div>
                             ) : (
-                                orders.map(order => (
+                                orders.map((order, index) => (
                                     <div key={order.id} className='order-card'>
                                         <div className='order-card-top'>
-                                            <span className='order-id'>Order #{order.id}</span>
+                                            <span className='order-id'>Order #{index + 1}</span>
                                             <OrderTimer
                                                 createdAt={order.created_at}
                                                 onExpired={() => handleOrderExpired(order.id)} 
